@@ -7,6 +7,7 @@ using Capa_Entidad;
 /*Conexion a la BD*/
 using System.Data.SqlClient;
 using System.Data;
+using System.Configuration;
 
 
 namespace Capa_Datos
@@ -37,8 +38,11 @@ namespace Capa_Datos
         {
             //instacia de la lista
             List<TipoHabitacionCLS> lista = null;
+            string cadena = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
+
             //cadena de conexion
-            using (SqlConnection cn = new SqlConnection("server=DESKTOP-AMTKMKE\\SQLEXPRESS;database=BDHotel;Integrated Security=true"))
+            //@"server=DESKTOP-AMTKMKE\SQLEXPRESS;database=BDHotel;Integrated Security=true"
+            using (SqlConnection cn = new SqlConnection(cadena))
             {
                 try
                 {
