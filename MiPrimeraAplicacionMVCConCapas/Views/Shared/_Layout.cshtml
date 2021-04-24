@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <div class="webdoktoru"><a href="//web-doktoru.com">Web-Doktoru</a></div>
+   
     <div class="nav-side-menu">
         <div class="tasi">
             <div class="brand">@*<img src="//tecrubeliyim.com/wp-content/uploads/logoS.png" width="150">*@<!-- /Web-Doktoru --></div>
@@ -38,9 +38,9 @@
                     </li>
 
                     <li>
-                        <a href="#ornekler">
-                            Örnekler
-                        </a>
+                        @Html.ActionLink("Cama", "Index", "Cama",
+                       new { area = "" }, new { @class = "nav-link js-scroll-trigger" })
+
                     </li>
                     <li>
                         <a href="#ayrintilar">
