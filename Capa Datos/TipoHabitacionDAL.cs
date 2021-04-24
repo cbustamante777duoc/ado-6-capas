@@ -12,7 +12,7 @@ using System.Configuration;
 
 namespace Capa_Datos
 {
-    public class TipoHabitacionDAL
+    public class TipoHabitacionDAL:CadenaDAL
     {
 
         //public List<TipoHabitacionCLS> listarTipoHabitacion()
@@ -38,7 +38,7 @@ namespace Capa_Datos
         {
             //instacia de la lista
             List<TipoHabitacionCLS> lista = null;
-            string cadena = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
+           // string cadena = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
 
             //cadena de conexion
             //@"server=DESKTOP-AMTKMKE\SQLEXPRESS;database=BDHotel;Integrated Security=true"
