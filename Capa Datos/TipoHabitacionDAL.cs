@@ -61,15 +61,21 @@ namespace Capa_Datos
                             lista = new List<TipoHabitacionCLS>();
                             //llamada de la clase
                             TipoHabitacionCLS oTipoHabitacionCLS;
+
+                            //esto guarda la posicion en caso se haga un alter el orden se va a mantener igual
+                            int posId = drd.GetOrdinal("IIDTIPOHABILITACION");
+                            int postNombre = drd.GetOrdinal("NOMBRE");
+                            int postDescrip = drd.GetOrdinal("DESCRIPCION");
+
                             //recorrido del procedure
                             while (drd.Read())
                             {
                                 //instacian de la clase tipoHabitacion
                                 oTipoHabitacionCLS = new TipoHabitacionCLS();
                                 //recorrido de los campos del procedure igualdos con la clase
-                                oTipoHabitacionCLS.id = drd.GetInt32(0);
-                                oTipoHabitacionCLS.nombre = drd.GetString(1);
-                                oTipoHabitacionCLS.descripcion = drd.GetString(2);
+                                oTipoHabitacionCLS.id = drd.GetInt32(posId);
+                                oTipoHabitacionCLS.nombre = drd.GetString(postNombre);
+                                oTipoHabitacionCLS.descripcion = drd.GetString(postDescrip);
                                 //se agrega a la lista el objeto de tipoHabitacion
                                 lista.Add(oTipoHabitacionCLS);
                             }
