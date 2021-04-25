@@ -73,9 +73,9 @@ namespace Capa_Datos
                                 //instacian de la clase tipoHabitacion
                                 oTipoHabitacionCLS = new TipoHabitacionCLS();
                                 //recorrido de los campos del procedure igualdos con la clase
-                                oTipoHabitacionCLS.id = drd.GetInt32(posId);
-                                oTipoHabitacionCLS.nombre = drd.GetString(postNombre);
-                                oTipoHabitacionCLS.descripcion = drd.GetString(postDescrip);
+                                oTipoHabitacionCLS.id = drd.IsDBNull(posId) ? 0 : drd.GetInt32(posId);
+                                oTipoHabitacionCLS.nombre = drd.IsDBNull(postNombre) ? "" : drd.GetString(postNombre);
+                                oTipoHabitacionCLS.descripcion = drd.IsDBNull(postDescrip) ? "" : drd.GetString(postDescrip);
                                 //se agrega a la lista el objeto de tipoHabitacion
                                 lista.Add(oTipoHabitacionCLS);
                             }
