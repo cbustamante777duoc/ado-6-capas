@@ -42,10 +42,11 @@ namespace Capa_Datos
                             
                             while (drd.Read())
                             {
+                                //drd.IsDBNull(postNombre) ? "" sirve para validar si es los valores viene como null
                                 oCamaCLS = new CamaCLS();
-                                oCamaCLS.idCama = drd.GetInt32(posId);
-                                oCamaCLS.nombre = drd.GetString(postNombre);
-                                oCamaCLS.descripcion = drd.GetString(postDescrip);
+                                oCamaCLS.idCama = drd.IsDBNull(posId) ? 0: drd.GetInt32(posId);
+                                oCamaCLS.nombre = drd.IsDBNull(postNombre) ? "" :drd.GetString(postNombre);
+                                oCamaCLS.descripcion = drd.IsDBNull(postDescrip) ? "": drd.GetString(postDescrip);
                                 lista.Add(oCamaCLS);
                             }
                         }
