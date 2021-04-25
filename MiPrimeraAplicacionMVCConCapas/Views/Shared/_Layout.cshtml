@@ -23,19 +23,8 @@
                         @Html.ActionLink("Tipo Habitacion", "Index", "TipoHabitacion",
                        new { area = "" }, new { @class = "nav-link js-scroll-trigger" })
 
-                        @*<a href="#giris" class="nav-link js-scroll-trigger">
-            Giriş
-        </a>*@
                     </li>
-                    <li>
-                        @Html.ActionLink("Vista 2", "Inicio", "TipoHabitacion",
-                       new { area = "" }, new { @class = "nav-link js-scroll-trigger" })
-                    </li>
-
-                    <li>
-                        @Html.ActionLink("Vista 3", "VistaPruebaInicio", "TipoHabitacion",
-                      new { area = "" }, new { @class = "nav-link js-scroll-trigger" })
-                    </li>
+                 
 
                     <li>
                         @Html.ActionLink("Cama", "Index", "Cama",
@@ -68,6 +57,7 @@
         @RenderBody()
     </div>
   
+    <input type="hidden" id="hdfOculto" value="@Url.Content("~")" />
 
     @*<div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
