@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="CadenaDAL.cs" />
     <Compile Include="CamaDAL.cs" />
+    <Compile Include="MarcaDAL.cs" />
     <Compile Include="TipoHabitacionDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
