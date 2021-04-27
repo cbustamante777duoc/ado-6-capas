@@ -1,4 +1,6 @@
-﻿
+﻿function get(id) {
+    return document.getElementById(id).value;
+}
 
 
 function pintar(objConfiguracion) {

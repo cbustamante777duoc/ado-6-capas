@@ -11,3 +11,15 @@ function listarTipoHabitacion() {
     
 
 }
+
+function Buscar() {
+    var nombreTipoHabitacion = get("txtNombreTipoHabitacion")
+    //alert(nombreTipoHabitacion);
+    pintar({
+        url: "TipoHabitacion/filtrarTipoHabitacionPorNombre/?nombreHabitacion=" + nombreTipoHabitacion,
+        id: "divTabla",
+        cabeceras: ["Id", "Nombre", "Descripcion"],
+        propiedades: ["id", "nombre", "descripcion"]
+    })
+
+}
