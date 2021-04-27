@@ -48,6 +48,12 @@ namespace MiPrimeraAplicacionMVCConCapas.Controllers
             return Json(obj.listarTipoHabitacion(),JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult filtrarTipoHabitacionPorNombre(string nombreHabitacion)
+        {
+            TipoHabitacionBL obj = new TipoHabitacionBL();
+            return Json(obj.FiltrarTipoHabitacion(nombreHabitacion), JsonRequestBehavior.AllowGet);
+        }
+
 
 
     }

@@ -99,5 +99,67 @@ namespace Capa_Datos
 
         }
 
+        public List<TipoHabitacionCLS> FiltrarTipoHabitacion(string nombreHabitacion)
+        {
+            //instacia de la lista
+            List<TipoHabitacionCLS> lista = null;
+         
+            using (SqlConnection cn = new SqlConnection(cadena))
+            {
+                try
+                {
+                    //abrimos la conexion
+                    cn.Open();
+                    //llamada a store procedure
+                    using (SqlCommand cmd = new SqlCommand("uspFiltrarTipoHabitacion", cn))
+                    {
+                        //se agregan el parametro para realizar un procedimiento almacenado
+                          cmd.CommandType = CommandType.StoredProcedure;
+                          cmd.Parameters.AddWithValue("@nombreHabitacion", nombreHabitacion);  
+                      
+                        SqlDataReader drd = cmd.ExecuteReader();
+                        if (drd != null)
+                        {
+                            
+                            lista = new List<TipoHabitacionCLS>();
+                            
+                            TipoHabitacionCLS oTipoHabitacionCLS;
+
+                            int posId = drd.GetOrdinal("IIDTIPOHABILITACION");
+                            int postNombre = drd.GetOrdinal("NOMBRE");
+                            int postDescrip = drd.GetOrdinal("DESCRIPCION");
+
+                           while (drd.Read())
+                            {
+                               
+                                oTipoHabitacionCLS = new TipoHabitacionCLS();
+                                
+                                oTipoHabitacionCLS.id = drd.IsDBNull(posId) ? 0 : drd.GetInt32(posId);
+                                oTipoHabitacionCLS.nombre = drd.IsDBNull(postNombre) ? "" : drd.GetString(postNombre);
+                                oTipoHabitacionCLS.descripcion = drd.IsDBNull(postDescrip) ? "" : drd.GetString(postDescrip);
+                                
+                                lista.Add(oTipoHabitacionCLS);
+                            }
+                        }
+
+                    }
+
+
+                    //cuando se llama la conexion se debe cerrar la conexion
+                    cn.Close();
+                }
+                catch (Exception ex)
+                {
+
+                    cn.Close();
+                }
+
+            }
+            return lista;
+
+
+        }
+
+
     }
 }
