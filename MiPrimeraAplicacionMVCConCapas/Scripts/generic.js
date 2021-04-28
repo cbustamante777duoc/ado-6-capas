@@ -2,8 +2,10 @@
     return document.getElementById(id).value;
 }
 
+var objConfiguracionGlobal;
+var objBusquedaGlobal;
 
-function pintar(objConfiguracion) {
+function pintar(objConfiguracion, objBusqueda) {
 
     var raiz = document.getElementById("hdfOculto").value;
     var urlAbsoluta = window.location.protocol + "//" +
@@ -12,7 +14,42 @@ function pintar(objConfiguracion) {
     fetch(urlAbsoluta)
         .then(res => res.json())
         .then(res => {
-            var contenido = "<table class='table'>";
+            //VALIDACIONES
+            var contenido = "";
+            if (objBusqueda != undefined && objBusqueda.busqueda == true) {
+                if (objBusqueda.placeholder == undefined) 
+                    objBusqueda.placeholder = "Ingrese un valor"
+                if (objBusqueda.id == undefined)
+                    objBusqueda.id = "txtBusqueda"
+                if (objBusqueda.type == undefined)
+                    objBusqueda.type = "text"
+                if (objConfiguracion.id == undefined)
+                    objConfiguracion.id = "divTabla"
+                
+                //ASIGNAR LOS VALORES
+                objConfiguracionGlobal = objConfiguracion;
+                objBusquedaGlobal = objBusqueda;
+
+                contenido += `
+                <div class="input-group mb-3">`
+
+                contenido +=`
+                    <input type="${objBusqueda.type}" class="form-control" 
+                       id="${objBusqueda.id}"
+                    placeholder="${objBusqueda.placeholder}" />
+                `
+                contenido+=`
+                <button class="btn btn-primary"
+                    onclick="Buscar()"
+                    type="button" >Buscar</button>
+                </div>    
+                `
+                
+
+            }
+
+
+            contenido += "<table class='table'>";
             contenido += "<tr>";
             for (var j = 0; j < objConfiguracion.cabeceras.length; j++) {
                 contenido += "<th>" + objConfiguracion.cabeceras[j]+"</th>"
@@ -37,5 +74,20 @@ function pintar(objConfiguracion) {
             document.getElementById(objConfiguracion.id).innerHTML = contenido;
             //alert(res)
         })
+
+}
+
+function Buscar() {
+    var objConf = objConfiguracionGlobal;
+    var objBus = objBusquedaGlobal;
+
+    var valor = get(objBus.id)
+    pintar({
+        url: `${objBus.url}/?${objBus.nombreParametro}=` + valor,
+        id: objConf.id,
+        cabeceras: objConf.cabeceras,
+        propiedades: objConf.propiedades
+
+    }, objBus)
 
 }

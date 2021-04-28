@@ -20,6 +20,13 @@ namespace MiPrimeraAplicacionMVCConCapas.Controllers
             CamaBL oCamaBL = new CamaBL();
             return Json( oCamaBL.listarCama(),JsonRequestBehavior.AllowGet);
         
-        } 
+        }
+
+        public JsonResult FiltrarCama(string nombre)
+        {
+            CamaBL oCamaBL = new CamaBL();
+            return Json(oCamaBL.FiltrarCama(nombre), JsonRequestBehavior.AllowGet);
+
+        }
     }
 }

@@ -12,6 +12,7 @@ function listarTipoHabitacion() {
 
 }
 
+//en el buscar se usa el pintar pero se cambia la url
 function Buscar() {
     var nombreTipoHabitacion = get("txtNombreTipoHabitacion")
     //alert(nombreTipoHabitacion);
