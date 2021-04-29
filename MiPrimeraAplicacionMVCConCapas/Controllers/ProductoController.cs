@@ -21,5 +21,11 @@ namespace MiPrimeraAplicacionMVCConCapas.Controllers
             return Json(obj.listarProducto(), JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult filtrarProductoPorNombre(string nombreProducto)
+        {
+            ProductoBL obj = new ProductoBL();
+            return Json(obj.filtrarProductos(nombreProducto), JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
