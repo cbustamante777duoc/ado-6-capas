@@ -43,6 +43,7 @@ function pintar(objConfiguracion, objBusqueda) {
                     ${objBusqueda.button == true ? "" : "onkeyup='Buscar()'" } 
                     placeholder="${objBusqueda.placeholder}" />
                 `
+                // PREGUNTA SI EL objBusqueda es true en el archivo cama.js si es lo agrega el boton
                 if (objBusqueda.button==true) {
                     contenido += `
                      <button class="btn btn-primary"
@@ -98,20 +99,45 @@ function generarTabla(objConfiguracion, res) {
     return contenido;
 }
 
+
+function fetchGet(url, callback) {
+    var raiz = document.getElementById("hdfOculto").value;
+    var urlAbsoluta = window.location.protocol + "//" +
+        window.location.host + raiz + url;
+
+    fetch(urlAbsoluta).then(res => res.json())
+        .then(res => {
+            callback(res);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+
+}
+
 function Buscar() {
     //todos objBusqueda esta en los respectivos js
     var objConf = objConfiguracionGlobal;
     var objBus = objBusquedaGlobal;
 
-    var valor = get(objBus.id)
+    //recibe el valor id cama.js
+    var valor = get(objBus.id);
 
-    fetch(`${objBus.url}/?${objBus.nombreParametro}=` + valor)
+    //url absoluta y agrega el contenido de la tabla a divContenedor
+    fetchGet(`${objBus.url}/?${objBus.nombreParametro}=` + valor, function (res) {
+        var respuesta = generarTabla(objConf, res);
+        document.getElementById("divContenedor").innerHTML = respuesta;
+
+    })
+
+   /* fetch(`${objBus.url}/?${objBus.nombreParametro}=` + valor)
         .then(res => res.json())
         .then(res => {
             var respuesta = generarTabla(objConf, res);
             document.getElementById("divContenedor").innerHTML = respuesta;
 
         })
+    */
 
     //pintar({
     //    //ahora cambia esta linea
