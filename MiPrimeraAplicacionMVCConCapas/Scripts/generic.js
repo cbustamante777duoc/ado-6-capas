@@ -25,6 +25,9 @@ function pintar(objConfiguracion, objBusqueda) {
                     objBusqueda.type = "text"
                 if (objConfiguracion.id == undefined)
                     objConfiguracion.id = "divTabla"
+                if (objBusqueda.button == undefined)
+                    objBusqueda.button = true;
+
                 
                 //ASIGNAR LOS VALORES
                 objConfiguracionGlobal = objConfiguracion;
@@ -37,14 +40,21 @@ function pintar(objConfiguracion, objBusqueda) {
                 contenido +=`
                     <input type="${objBusqueda.type}" class="form-control" 
                        id="${objBusqueda.id}"
+                    ${objBusqueda.button == true ? "" : "onkeyup='Buscar()'" } 
                     placeholder="${objBusqueda.placeholder}" />
                 `
-                contenido+=`
-                <button class="btn btn-primary"
+                if (objBusqueda.button==true) {
+                    contenido += `
+                     <button class="btn btn-primary"
                     onclick="Buscar()"
                     type="button" >Buscar</button>
-                </div>    
-                `
+                             `
+                }
+
+              
+
+                contenido += `</div >`;
+
                 
 
             }

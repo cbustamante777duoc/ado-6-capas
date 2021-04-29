@@ -14,7 +14,8 @@ function listarCama() {
             url: "Cama/FiltrarCama",
             nombreParametro:"nombre",
             id:"txtNombreCama",
-            placeholder:"Ingrese nombre de la cama",
+            placeholder: "Ingrese nombre de la cama",
+            button: false,
             type:"text"
     })
 }
