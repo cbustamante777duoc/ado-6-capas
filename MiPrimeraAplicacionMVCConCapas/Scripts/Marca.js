@@ -12,7 +12,7 @@ function listarMarca() {
         busqueda: true,
          url: "Marca/FiltrarMarca",
         nombreParametro: "nombre",
-        id: "txtNombreCama",
+        id: "txtNombreMarca",
         placeholder: "Ingrese nombre de la marca",
         button: false,
         type: "text"
