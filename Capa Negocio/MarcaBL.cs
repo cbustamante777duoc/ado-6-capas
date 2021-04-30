@@ -17,5 +17,12 @@ namespace Capa_Negocio
             return oMarcaDAL.listarMarca();
 
         }
+
+        public List<MarcaCLS> filtrarMarca(string nombremarca) 
+        {
+            MarcaDAL oMarcaDAL = new MarcaDAL();
+
+            return oMarcaDAL.filtrarMarca(nombremarca);
+        }
     }
 }
