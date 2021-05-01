@@ -5,14 +5,50 @@
 
 <h2>Tipo Habitacion</h2>
 
-<div class="input-group mb-3">
+<fieldset class="container mb-4">
+    <legend> Datos de tipo Habitacion </legend>
+
+    <form id="frmTipoHabitacion">
+
+        <div class="mb-3">
+            <label>Id tipo Habitacion</label>
+            <input type="text" class="form-control"
+                   name="id" value="0" readonly />
+
+        </div>
+
+        <div class="mb-3">
+            <label>Nombre tipo habitacion</label>
+            <input type="text" class="form-control"
+                   name="nombre" />
+
+        </div>
+
+        <div class="mb-3">
+            <label>Descripcion tipo habitacion</label>
+            <input type="text" class="form-control"
+                   name="descripcion" />
+
+        </div>
+
+        <button class="btn btn-primary">Aceptar</button>
+        <button class="btn btn-danger">Limpiar</button>
+
+    </form>
+
+   
+
+</fieldset>
+
+<div class="mb-3">
     <input type="text" class="form-control" 
-           id="txtNombreTipoHabitacion"
+          id="txtNombreTipoHabitacion"
            placeholder="ingrese el nombre tipo habitacion" />
 
     <button class="btn btn-primary"
             onclick="Buscar()"
-            type="button" id="btnNombreTipoHabitacion">Buscar</button>
+            type="button" id="btnNombreTipoHabitacion">Buscar
+    </button>
 </div>
 
 

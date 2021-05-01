@@ -24,5 +24,12 @@ namespace Capa_Negocio
 
         }
 
+        public int guardarTipoHabitacion(TipoHabitacionCLS oTipoHabitacionCLS) 
+        {
+            TipoHabitacionDAL oTipoHabitacionDAL = new TipoHabitacionDAL();
+            return oTipoHabitacionDAL.guardarTipoHabitacion(oTipoHabitacionCLS);
+
+        }
+
     }
 }
