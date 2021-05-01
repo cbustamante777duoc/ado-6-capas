@@ -29,6 +29,17 @@ function GuardarDatos() {
 
     var frmTipoHabitacion = document.getElementById("frmTipoHabitacion");
     var frm = new FormData(frmTipoHabitacion);
+    fetchPostText("TipoHabitacion/guardarDatos", frm, function (res) {
+
+        if (res == "1") {
+
+            listarTipoHabitacion();
+
+        }
+    })
+
+
+    /*
     fetch("TipoHabitacion/guardarDatos", {
         method: "POST",
         body: frm
@@ -36,14 +47,10 @@ function GuardarDatos() {
         .then(res => {
             if (res == 1) {
 
-                pintar({
-                    url: "TipoHabitacion/lista", id: "divTabla",
-                    cabeceras: ["Id", "Nombre", "Descripcion"],
-                    propiedades: ["id", "nombre", "descripcion"]
-                })
+                listarTipoHabitacion();
 
             }
-        })
+        })*/
 
 
 }

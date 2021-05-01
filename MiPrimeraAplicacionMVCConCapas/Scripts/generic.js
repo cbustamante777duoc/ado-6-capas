@@ -1,4 +1,6 @@
-﻿function get(id) {
+﻿//const { Callbacks } = require("jquery");
+
+function get(id) {
     return document.getElementById(id).value;
 }
 
@@ -112,6 +114,35 @@ function fetchGet(url, callback) {
         .catch(err => {
             console.log(err);
         })
+
+}
+
+
+function fetchPostText(url,frm, callback) {
+    var raiz = document.getElementById("hdfOculto").value;
+    var urlAbsoluta = window.location.protocol + "//" +
+        window.location.host + raiz + url;
+
+    fetch(url, {
+        method: "POST",
+        body: frm
+    }).then(res => res.text())
+        .then(res => {
+            callback(res)
+        })
+        .catch(err => {
+            console.log(err);
+        })
+
+    /*
+    fetch(urlAbsoluta).then(res => res.json())
+        .then(res => {
+            callback(res);
+        })
+        .catch(err => {
+            console.log(err);
+        })*/
+
 
 }
 
