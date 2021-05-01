@@ -54,6 +54,13 @@ namespace MiPrimeraAplicacionMVCConCapas.Controllers
             return Json(obj.FiltrarTipoHabitacion(nombreHabitacion), JsonRequestBehavior.AllowGet);
         }
 
+        public int guardarDatos(TipoHabitacionCLS oTipoHabitacionCLS) 
+        {
+            TipoHabitacionBL obj = new TipoHabitacionBL();
+            return obj.guardarTipoHabitacion(oTipoHabitacionCLS);
+
+        }
+
 
 
     }
