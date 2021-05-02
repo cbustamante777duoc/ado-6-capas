@@ -25,6 +25,21 @@ function Buscar() {
 
 }
 
+//funcion que limpia los campos del formulario a traves de los name que tiene los input
+function Limpiar() {
+    //setName("id", "")
+    //setName("nombre", "")
+    //setName("descripcion","")
+
+    //var elementos = document.querySelectorAll("#frmTipoHabitacion [name]");
+
+    //for (var i = 0; i < elementos.length; i++) {
+    //    elementos[i].value = "";
+    //}
+
+    LimpiarDatos("frmTipoHabitacion");
+}
+
 function GuardarDatos() {
 
     var frmTipoHabitacion = document.getElementById("frmTipoHabitacion");
@@ -34,6 +49,7 @@ function GuardarDatos() {
         if (res == "1") {
 
             listarTipoHabitacion();
+            Limpiar();
 
         }
     })

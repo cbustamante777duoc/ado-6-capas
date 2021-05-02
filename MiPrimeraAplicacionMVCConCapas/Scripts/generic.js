@@ -1,7 +1,27 @@
 ﻿//const { Callbacks } = require("jquery");
-
+//recibe el id
 function get(id) {
     return document.getElementById(id).value;
+}
+
+function set(id, valor) {
+    return document.getElementById(id).value = valor;
+}
+
+//limpiar los datos por input
+function setName(id, valor) {
+    return document.getElementsByName(id)[0].value = valor;
+}
+
+//limpiar los datos de formulario entero
+function LimpiarDatos(idFormulario) {
+    var elementos = document.querySelectorAll("#"+idFormulario+" [name]");
+
+    for (var i = 0; i < elementos.length; i++) {
+        elementos[i].value = "";
+    }
+
+
 }
 
 var objConfiguracionGlobal;
@@ -101,7 +121,7 @@ function generarTabla(objConfiguracion, res) {
     return contenido;
 }
 
-
+//url absoluta con fetch(listar)
 function fetchGet(url, callback) {
     var raiz = document.getElementById("hdfOculto").value;
     var urlAbsoluta = window.location.protocol + "//" +
@@ -118,6 +138,7 @@ function fetchGet(url, callback) {
 }
 
 
+// url absoluta con fech(metodo POST "guardar")
 function fetchPostText(url,frm, callback) {
     var raiz = document.getElementById("hdfOculto").value;
     var urlAbsoluta = window.location.protocol + "//" +
