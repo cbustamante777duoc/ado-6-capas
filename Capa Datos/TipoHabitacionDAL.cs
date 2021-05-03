@@ -202,6 +202,63 @@ namespace Capa_Datos
 
         }
 
+        public TipoHabitacionCLS recuperarTipoHabitacion(int id)
+        {
+            //instacia del objeto como null
+            TipoHabitacionCLS oTipoHabitacionCLS = null;
+
+            using (SqlConnection cn = new SqlConnection(cadena))
+            {
+                try
+                {
+                    //abrimos la conexion
+                    cn.Open();
+                    //llamada a store procedure
+                    using (SqlCommand cmd = new SqlCommand("uspRecuperarTipoHabitacion2", cn))
+                    {
+                        //indicacion que es un store procedure
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@id",id);
+                          
+                        SqlDataReader drd = cmd.ExecuteReader();
+                        if (drd != null)
+                        {
+                            //esto guarda la posicion en caso se haga un alter el orden se va a mantener igual
+                            int posId = drd.GetOrdinal("IIDTIPOHABILITACION");
+                            int postNombre = drd.GetOrdinal("NOMBRE");
+                            int postDescrip = drd.GetOrdinal("DESCRIPCION");
+
+                            //recorrido del procedure
+                            while (drd.Read())
+                            {
+                                //instacian de la clase tipoHabitacion
+                                oTipoHabitacionCLS = new TipoHabitacionCLS();
+                                //recorrido de los campos del procedure igualdos con la clase
+                                oTipoHabitacionCLS.id = drd.IsDBNull(posId) ? 0 : drd.GetInt32(posId);
+                                oTipoHabitacionCLS.nombre = drd.IsDBNull(postNombre) ? "" : drd.GetString(postNombre);
+                                oTipoHabitacionCLS.descripcion = drd.IsDBNull(postDescrip) ? "" : drd.GetString(postDescrip);
+                                
+                                
+                            }
+                        }
+
+                    }
+
+
+                    cn.Close();
+                }
+                catch (Exception ex)
+                {
+
+                    cn.Close();
+                }
+
+            }
+            return oTipoHabitacionCLS;
+
+
+        }
+
 
     }
 }

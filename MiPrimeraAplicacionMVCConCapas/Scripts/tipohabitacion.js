@@ -41,7 +41,7 @@ function Limpiar() {
     //    elementos[i].value = "";
     //}
 
-    LimpiarDatos("frmTipoHabitacion");
+    LimpiarDatos("frmTipoHabitacion", ["id"]);
     Correcto("Funciono mi alerta");
 }
 

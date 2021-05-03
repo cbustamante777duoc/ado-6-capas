@@ -14,11 +14,14 @@ function setName(id, valor) {
 }
 
 //limpiar los datos de formulario entero
-function LimpiarDatos(idFormulario) {
+function LimpiarDatos(idFormulario,excepciones=[]) {
     var elementos = document.querySelectorAll("#"+idFormulario+" [name]");
 
     for (var i = 0; i < elementos.length; i++) {
+        if (!excepciones.includes( elementos[i].name)) 
+
         elementos[i].value = "";
+        
     }
 
 

@@ -31,5 +31,12 @@ namespace Capa_Negocio
 
         }
 
+        public TipoHabitacionCLS recuperarTipoHabitacion(int id)
+        {
+            TipoHabitacionDAL oTipoHabitacionDAL = new TipoHabitacionDAL();
+            return oTipoHabitacionDAL.recuperarTipoHabitacion(id);
+
+        }
+
     }
 }
