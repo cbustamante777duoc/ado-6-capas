@@ -6,7 +6,11 @@ function listarTipoHabitacion() {
     pintar({
         url: "TipoHabitacion/lista", id: "divTabla",
         cabeceras: ["Id", "Nombre", "Descripcion"],
-        propiedades:["id","nombre","descripcion"]})
+        propiedades: ["id", "nombre", "descripcion"],
+        editar: true,
+        eliminar: true
+
+    })
 
     
 
@@ -38,6 +42,7 @@ function Limpiar() {
     //}
 
     LimpiarDatos("frmTipoHabitacion");
+    Correcto("Funciono mi alerta");
 }
 
 function GuardarDatos() {
