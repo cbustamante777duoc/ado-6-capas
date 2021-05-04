@@ -8,7 +8,8 @@ function listarTipoHabitacion() {
         cabeceras: ["Id", "Nombre", "Descripcion"],
         propiedades: ["id", "nombre", "descripcion"],
         editar: true,
-        eliminar: true
+        eliminar: true,
+        propiedadID:"id"
 
     })
 
@@ -24,7 +25,11 @@ function Buscar() {
         url: "TipoHabitacion/filtrarTipoHabitacionPorNombre/?nombreHabitacion=" + nombreTipoHabitacion,
         id: "divTabla",
         cabeceras: ["Id", "Nombre", "Descripcion"],
-        propiedades: ["id", "nombre", "descripcion"]
+        propiedades: ["id", "nombre", "descripcion"],
+        editar: true,
+        eliminar: true,
+        propiedadID: "id"
+
     })
 
 }
@@ -73,5 +78,18 @@ function GuardarDatos() {
             }
         })*/
 
+
+}
+
+function Editar(id) {
+    /*
+    fetchGet("TipoHabitacion/recuperarTipoHabitacion/?id=" + id, function (res) {
+        setName("id", res.id)
+        setName("nombre", res.nombre)
+        setName("descripcion", res.descripcion)
+
+    })*/
+
+    recuperarGenerico("TipoHabitacion/recuperarTipoHabitacion/?id=" + id,"frmTipoHabitacion")
 
 }
