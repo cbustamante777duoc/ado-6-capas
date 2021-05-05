@@ -38,5 +38,12 @@ namespace Capa_Negocio
 
         }
 
+        public int EliminarTipoHabitacion(int iidTipoHabitacion) 
+        {
+            TipoHabitacionDAL oTipoHabitacionDAL = new TipoHabitacionDAL();
+            return oTipoHabitacionDAL.EliminarTipoHabitacion(iidTipoHabitacion);
+
+        }
+
     }
 }

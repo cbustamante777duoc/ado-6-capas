@@ -46,7 +46,8 @@ function Limpiar() {
     //    elementos[i].value = "";
     //}
 
-    LimpiarDatos("frmTipoHabitacion", ["id"]);
+    //LimpiarDatos("frmTipoHabitacion", ["id"]);
+    LimpiarDatos("frmTipoHabitacion");
     Correcto("Funciono mi alerta");
 }
 
@@ -92,4 +93,21 @@ function Editar(id) {
 
     recuperarGenerico("TipoHabitacion/recuperarTipoHabitacion/?id=" + id,"frmTipoHabitacion")
 
+}
+
+function Eliminar(id) {
+    Confirmacion("Desea eliminar el tipo habitacion", "Confirmar Eliminacion", function (res) {
+
+        fetchGetText("TipoHabitacion/EliminarTipoHabitacion/?id=" + id, function (respuesta) {
+
+            if (respuesta == "1") {
+                Correcto("Se elimino correctamente");
+
+                listarTipoHabitacion();
+
+            }
+
+        })
+
+    })
 }

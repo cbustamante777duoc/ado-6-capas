@@ -24,5 +24,29 @@ namespace Capa_Negocio
 
             return oMarcaDAL.filtrarMarca(nombremarca);
         }
+
+        public int guardarMarca(MarcaCLS oMarcaCLS) 
+        {
+            MarcaDAL oMarcaDAL = new MarcaDAL();
+
+            return oMarcaDAL.guardarMarca(oMarcaCLS);
+
+        }
+
+        public MarcaCLS recuperarMarca(int id) 
+        {
+
+            MarcaDAL oMarcaDAL = new MarcaDAL();
+
+            return oMarcaDAL.recuperarMarca(id);
+        }
+
+        public int eliminarMarca(int iidMarca) 
+        {
+            MarcaDAL oMarcaDAL = new MarcaDAL();
+
+            return oMarcaDAL.eliminarMarca(iidMarca);
+
+        }
     }
 }

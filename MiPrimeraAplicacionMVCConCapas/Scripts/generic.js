@@ -61,7 +61,8 @@ function Confirmacion(texto = "Desea guadar los cambios?", title = "Confirmacion
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Si',
+        cancelButtonText:'No'
     }).then((result) => {
         if (result.isConfirmed) {
             callback();
@@ -118,7 +119,7 @@ function pintar(objConfiguracion, objBusqueda) {
                     ${objBusqueda.button == true ? "" : "onkeyup='Buscar()'" } 
                     placeholder="${objBusqueda.placeholder}" />
                 `
-                // PREGUNTA SI EL objBusqueda es true en el archivo cama.js si es lo agrega el boton
+                // PREGUNTA SI EL objBusqueda es true si es true agrega el boton de buscar
                 if (objBusqueda.button==true) {
                     contenido += `
                      <button class="btn btn-primary"
@@ -219,8 +220,23 @@ function fetchGet(url, callback) {
     var raiz = document.getElementById("hdfOculto").value;
     var urlAbsoluta = window.location.protocol + "//" +
         window.location.host + raiz + url;
-
+    //devuelde un Json
     fetch(urlAbsoluta).then(res => res.json())
+        .then(res => {
+            callback(res);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+
+}
+
+function fetchGetText(url, callback) {
+    var raiz = document.getElementById("hdfOculto").value;
+    var urlAbsoluta = window.location.protocol + "//" +
+        window.location.host + raiz + url;
+    //devuelve un text
+    fetch(urlAbsoluta).then(res => res.text())
         .then(res => {
             callback(res);
         })
@@ -296,6 +312,7 @@ function Buscar() {
 
 }
 
+//recupera la informacion para ser editada
 function recuperarGenerico(url,idFormulario, excepciones = []) {
 
     var elementos = document.querySelectorAll("#" + idFormulario + " [name]");

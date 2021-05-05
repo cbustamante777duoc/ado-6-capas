@@ -67,6 +67,12 @@ namespace MiPrimeraAplicacionMVCConCapas.Controllers
             return Json(obj.recuperarTipoHabitacion(id), JsonRequestBehavior.AllowGet);
         }
 
+        public int EliminarTipoHabitacion(int id) 
+        {
+            TipoHabitacionBL obj = new TipoHabitacionBL();
+            return obj.EliminarTipoHabitacion(id);
+        }
+
 
 
     }

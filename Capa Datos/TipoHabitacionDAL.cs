@@ -260,5 +260,46 @@ namespace Capa_Datos
         }
 
 
+        public int EliminarTipoHabitacion(int iidTipoHabitacion)
+        {
+            //si la respuesta es cero es porque hay algun error
+            int respuesta = 0;
+
+            using (SqlConnection cn = new SqlConnection(cadena))
+            {
+                try
+                {
+                    //abrir la conexion
+                    cn.Open();
+                    using (SqlCommand cmd = new SqlCommand("uspEliminarTipoHabitacion2", cn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        //se agregan los valores
+                        cmd.Parameters.AddWithValue("@id", iidTipoHabitacion);
+                       
+
+                        respuesta = cmd.ExecuteNonQuery();
+
+                        //cierre de la conexion
+                        cn.Close();
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                    respuesta = 0;
+                    //cierre de la conexion
+                    cn.Close();
+                }
+
+            }
+
+            return respuesta;
+
+        }
+
+
     }
 }
