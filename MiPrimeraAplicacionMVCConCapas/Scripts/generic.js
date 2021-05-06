@@ -74,7 +74,7 @@ function Confirmacion(texto = "Desea guadar los cambios?", title = "Confirmacion
 var objConfiguracionGlobal;
 var objBusquedaGlobal;
 
-function pintar(objConfiguracion, objBusqueda) {
+function pintar(objConfiguracion, objBusqueda, objFormulario) {
     //CONFIGURACION URL ABSOLUTA
     var raiz = document.getElementById("hdfOculto").value;
     var urlAbsoluta = window.location.protocol + "//" +
@@ -85,6 +85,26 @@ function pintar(objConfiguracion, objBusqueda) {
         .then(res => {
             //VALIDACIONES
             var contenido = "";
+
+            if (objFormulario != undefined) {
+                var type = objFormulario.type;
+                if (type == "fieldset") {
+                    contenido += "<fieldset class='mb-3'>";
+                    if (objFormulario.legend != undefined) {
+                        contenido += "<legend>" + objFormulario.legend+"</legend>";
+
+                    }
+                    contenido += construirFormulario(objFormulario);
+                    contenido += `
+                        <button class="btn btn-primary" onclick="GuardarDatos()">Aceptar</button>
+                        <button class="btn btn-danger" onclick="Limpiar()">Limpiar</button>
+
+                    `
+                    contenido += "</fieldset>";
+                }
+                
+            }
+
             if (objBusqueda != undefined && objBusqueda.busqueda == true) {
                 if (objBusqueda.placeholder == undefined) 
                     objBusqueda.placeholder = "Ingrese un valor"
@@ -108,6 +128,8 @@ function pintar(objConfiguracion, objBusqueda) {
                 //ASIGNAR LOS VALORES
                 objConfiguracionGlobal = objConfiguracion;
                 objBusquedaGlobal = objBusqueda;
+
+             
 
                 //TEMPLATE STRING
                 contenido += `
@@ -333,4 +355,39 @@ function recuperarGenerico(url,idFormulario, excepciones = []) {
 
     
 
+}
+
+
+function construirFormulario(objFormulario) {
+    var type = objFormulario.type;
+    var elementos = objFormulario.formulario;
+
+    var contenido = "<div class='mt-3 mb-3'>";
+    //FILAS
+    var arrayelemento;
+    var numeroarrayelemento;
+    for (var i = 0; i < elementos.length; i++) {
+        arrayelemento = elementos[i];
+        numeroarrayelemento = arrayelemento.length;
+        contenido += "<div class='row'>";
+        for (var j = 0; j < numeroarrayelemento; j++) {
+            var hijosArray = arrayelemento[j]
+            var typelemento = hijosArray.type;
+            contenido += `<div class="${hijosArray.class}">`
+            contenido += `<label>${hijosArray.label}</label>`
+            if (typelemento == "text") {
+                contenido += `  <input type="text" class="form-control"
+                       name="${hijosArray.name}" value="${hijosArray.value}"
+                   ${hijosArray.readonly == true ? "readonly" : ""}  />`
+            }
+            contenido += `</div>`
+
+        }
+
+        contenido += "</div>";
+
+    }
+
+    contenido += "</div>"
+    return contenido;
 }
