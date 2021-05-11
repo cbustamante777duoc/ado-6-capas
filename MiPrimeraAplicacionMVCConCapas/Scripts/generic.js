@@ -74,97 +74,103 @@ function Confirmacion(texto = "Desea guadar los cambios?", title = "Confirmacion
 var objConfiguracionGlobal;
 var objBusquedaGlobal;
 
+
+
 function pintar(objConfiguracion, objBusqueda, objFormulario) {
     //CONFIGURACION URL ABSOLUTA
+    //URL Absolute  https://localhos
     var raiz = document.getElementById("hdfOculto").value;
     var urlAbsoluta = window.location.protocol + "//" +
         window.location.host + raiz + objConfiguracion.url;
-
+    // alert(urlAbsoluta)
+    //Controles//accion
     fetch(urlAbsoluta)
         .then(res => res.json())
         .then(res => {
-            //VALIDACIONES
             var contenido = "";
-
+            //Configuracion del formulario
             if (objFormulario != undefined) {
+                if (objFormulario.guardar == undefined)
+                    objFormulario.guardar = true
+                if (objFormulario.limpiar == undefined)
+                    objFormulario.limpiar = true
+                if (objFormulario.formulariogenerico == undefined)
+                    objFormulario.formulariogenerico = false
                 var type = objFormulario.type;
                 if (type == "fieldset") {
-                    contenido += "<fieldset class='mb-3'>";
+                    contenido += "<fieldset>";
                     if (objFormulario.legend != undefined) {
-                        contenido += "<legend>" + objFormulario.legend+"</legend>";
-
+                        contenido += "<legend>" + objFormulario.legend + "</legend>"
                     }
-                    contenido += construirFormulario(objFormulario);
-                    contenido += `
-                        <button class="btn btn-primary" onclick="GuardarDatos()">Aceptar</button>
-                        <button class="btn btn-danger" onclick="Limpiar()">Limpiar</button>
 
-                    `
+
+                    contenido += construirFormulario(objFormulario)
+                    //guadarDatos (tipoHabitacion) guardarGenerico(Cama)
+                    contenido += `
+                     ${objFormulario.guardar == true ?
+                            `<button class="btn btn-primary"
+                          onclick="${(objFormulario.formulariogenerico == undefined
+                                || objFormulario.formulariogenerico == false) ? 'GuardarDatos()'
+                                : 'GuardarGenerico()'}">
+                                Aceptar</button>` :
+                            ''}    
+                        ${objFormulario.limpiar == true ?
+                            `<button class="btn btn-danger"
+                                  onclick="Limpiar()">
+                                   Limpiar</button>`
+                            : ''} 
+                       `
                     contenido += "</fieldset>";
                 }
-                
+
             }
 
             if (objBusqueda != undefined && objBusqueda.busqueda == true) {
-                if (objBusqueda.placeholder == undefined) 
+                if (objBusqueda.placeholder == undefined)
                     objBusqueda.placeholder = "Ingrese un valor"
                 if (objBusqueda.id == undefined)
-                    objBusqueda.id = "txtBusqueda"
+                    objBusqueda.id = "txtbusqueda"
                 if (objBusqueda.type == undefined)
                     objBusqueda.type = "text"
                 if (objConfiguracion.id == undefined)
-                    objConfiguracion.id = "divTabla"
+                    objConfiguracion.id = "divTabla";
                 if (objBusqueda.button == undefined)
                     objBusqueda.button = true;
                 if (objConfiguracion.editar == undefined)
                     objConfiguracion.editar = false;
                 if (objConfiguracion.eliminar == undefined)
                     objConfiguracion.eliminar = false;
-                if (objConfiguracion.propiedadID == undefined)
-                    objConfiguracion.propiedadID = "id";
-
-
-                
-                //ASIGNAR LOS VALORES
+                if (objConfiguracion.propiedadId == undefined)
+                    objConfiguracion.propiedadId = "id";
+                //Asignar los valores
                 objConfiguracionGlobal = objConfiguracion;
                 objBusquedaGlobal = objBusqueda;
 
-             
-
-                //TEMPLATE STRING
                 contenido += `
-                <div class="input-group mb-3">`
+                 <div class="input-group mb-3">`
 
-                contenido +=`
-                    <input type="${objBusqueda.type}" class="form-control" 
-                       id="${objBusqueda.id}"
-                    ${objBusqueda.button == true ? "" : "onkeyup='Buscar()'" } 
-                    placeholder="${objBusqueda.placeholder}" />
-                `
-                // PREGUNTA SI EL objBusqueda es true si es true agrega el boton de buscar
-                if (objBusqueda.button==true) {
+                contenido += `
+                           <input type="${objBusqueda.type}" class="form-control"
+                           id="${objBusqueda.id}"
+                         ${objBusqueda.button == true ? "" : "onkeyup='Buscar()'"}  
+                       placeholder="${objBusqueda.placeholder}"
+                               />`
+                if (objBusqueda.button == true) {
                     contenido += `
-                     <button class="btn btn-primary"
-                    onclick="Buscar()"
-                    type="button" >Buscar</button>
-                             `
+                  <button class="btn btn-primary" 
+                     onclick="Buscar()"
+                      type="button" >
+                    Buscar</button>`
                 }
 
-              
-
-                contenido += `</div >`;
-
-                
-
+                contenido += ` </div>
+             `
             }
-
             contenido += "<div id='divContenedor'>";
-            //llama de la funcion que pinta la tabla
             contenido += generarTabla(objConfiguracion, res);
-           
             contenido += "</div>";
             document.getElementById(objConfiguracion.id).innerHTML = contenido;
-            //alert(res)
+
         })
 
 }
@@ -372,13 +378,56 @@ function construirFormulario(objFormulario) {
         contenido += "<div class='row'>";
         for (var j = 0; j < numeroarrayelemento; j++) {
             var hijosArray = arrayelemento[j]
+
+            if (hijosArray.class == undefined) {
+
+                hijosArray.class = "mb-3";
+            }
+
+            if (hijosArray.type == undefined) {
+
+                hijosArray.type = "text";
+            }
+
+            if (hijosArray.readonly == undefined) {
+
+                hijosArray.readonly = false;
+            }
+
+            if (hijosArray.value == undefined) {
+
+                hijosArray.value = "";
+            }
+
+            if (hijosArray.label == undefined) {
+
+                hijosArray.label = hijosArray.name;
+            }
+            if (hijosArray.cols == undefined) {
+
+                hijosArray.cols = "50";
+            }
+            if (hijosArray.rows == undefined) {
+
+                hijosArray.rows = "10";
+            }
+
+
+
             var typelemento = hijosArray.type;
             contenido += `<div class="${hijosArray.class}">`
             contenido += `<label>${hijosArray.label}</label>`
-            if (typelemento == "text") {
-                contenido += `  <input type="text" class="form-control"
+            if (typelemento == "text" || typelemento == "number" || typelemento == "date") {
+                contenido += `  <input type="${typelemento}" class="form-control"
                        name="${hijosArray.name}" value="${hijosArray.value}"
                    ${hijosArray.readonly == true ? "readonly" : ""}  />`
+            }
+            else if (typelemento == "textarea") {
+
+                contenido += `<textarea name="${hijosArray.name}" class="form-control" 
+                    rows="${hijosArray.rows}" cols="${hijosArray.cols}">
+                    ${hijosArray.value}
+                    </textarea>`
             }
             contenido += `</div>`
 
